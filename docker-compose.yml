@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## docker-compose.yml: Orchestration des services API, MongoDB et InfluxDB pour le développement
 services:
   api:
@@ -51,3 +52,58 @@ volumes:
   influxdb_config:
 
 
+=======
+## docker-compose.yml: Orchestration des services API, MongoDB et InfluxDB pour le développement
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: api
+    env_file:
+      - ./backend/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+      - influxdb
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run dev
+
+  mongodb:
+    image: mongo:7
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo_data:/data/db
+
+  influxdb:
+    image: influxdb:2.7
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: admin12345
+      DOCKER_INFLUXDB_INIT_ORG: my-org
+      DOCKER_INFLUXDB_INIT_BUCKET: my-bucket
+      DOCKER_INFLUXDB_INIT_RETENTION: 72h
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: dev-token-123
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+      - influxdb_config:/etc/influxdb2
+
+volumes:
+  mongo_data:
+  influxdb_data:
+  influxdb_config:
+
+
+>>>>>>> 1061ffe (Add project mongoDB)
