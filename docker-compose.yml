@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ## docker-compose.yml: Orchestration des services API, MongoDB et InfluxDB pour le développement
 services:
   api:

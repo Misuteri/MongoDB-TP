@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Environnement de développement d'une API — entièrement Dockerisé
 
 Ce projet fournit un environnement de dev complet pour une API Node.js, organisé autour de Docker. Il inclut:
